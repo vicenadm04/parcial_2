@@ -1,0 +1,14 @@
+#entorno virtual
+/parcial_2 
+
+## Archivos de Python compilados
+__pycache__/
+*.pyc
+
+
+# Logs
+*.log
+
+# Caché de pytest
+.pytest_cache/
+pytest-cache-files-*/
