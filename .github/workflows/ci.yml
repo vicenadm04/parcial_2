@@ -22,3 +22,11 @@ jobs:
       - name: Ejecutar tests
         run:  |
           pytest
+
+  deploy:
+      needs: test
+      runs-on: ubuntu-latest
+      if: success()
+      steps:
+        - name: Notify Render
+          run: echo "Deploy handled by Render's GitHub integration"
