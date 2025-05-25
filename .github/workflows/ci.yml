@@ -23,7 +23,7 @@ jobs:
         run: pytest
       - name: ejecutar con flake8
         run: flake8 .  || true
-      - name: Notificar a Slack si el workflow fue exitoso
+      - name: Notificar a Slack 
         if: success()
         run: |
           curl -X POST -H 'Content-type: application/json' \
