@@ -23,6 +23,12 @@ jobs:
         run: pytest
       - name: ejecutar con flake8
         run: flake8 .  || true
+      - name: Notificar a Slack si el workflow fue exitoso
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"✅ *ÉXITO en el workflow CI* de `${{ github.repository }}`\n🟢 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
+          "${{ vars.SLACK_WEBHOOK_URL }}"
 
 
 
