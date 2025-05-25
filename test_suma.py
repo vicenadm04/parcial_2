@@ -8,4 +8,4 @@ def test_suma_negativo():
     assert suma(-3, -5) == -8
 
 def test_suma_mixto():
-    assert suma (3, -5) == -2
+    assert suma ( 3, -5) == -2
