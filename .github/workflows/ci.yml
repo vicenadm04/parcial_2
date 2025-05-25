@@ -24,16 +24,17 @@ jobs:
       - name: ejecutar con flake8
         run: flake8 .  || true
       - name: Notificar a Slack 
-        if: success()
+        if: always()
         run: |
-          if [ "${{ steps.lint.outcome }}" == "success" ] && [ "${{ steps.test.outcome }}" == "success" ]; then
-            curl -X POST -H 'Content-type: application/json' \
-              --data '{"text":"✅ *ÉXITO en el workflow CI* de `${{ github.repository }}`\n🟢 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
-              "${{ vars.SLACK_WEBHOOK_URL }}"
+          if [ "${{ job.status }}" == "success" ]; then
+            mensaje="✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           else
-            curl -X POST -H 'Content-type: application/json' \
-              --data '{"text":"🚨 *FALLÓ el workflow CI* en `${{ github.repository }}`\n🔁 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
-              "${{ vars.SLACK_WEBHOOK_URL }}"
+            mensaje="🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+          fi
+
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          "${{ vars.SLACK_WEBHOOK_URL }}"
 
 
 
