@@ -3,3 +3,6 @@ pytest
 
 fastapi
 uvicorn
+
+
+flake8
