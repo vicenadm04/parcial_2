@@ -1,32 +1,26 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: ubuntu-lasted
     steps:
-      - name: Clonar el repositorio
+      - name: clonar repositorios
         uses: actions/checkout@v3
-
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
-      - name: Instalar dependencias 
+      - name: instalar dependecias
         run: |
           pip install -r requirements.txt
+      - name: ejecutar test
+        run: pytest
 
-      - name: Ejecutar tests
-        run:  |
-          pytest
 
-  deploy:
-      needs: test
-      runs-on: ubuntu-latest
-      if: success()
-      steps:
-        - name: Notify Render
-          run: echo "Deploy handled by Render's GitHub integration"
+
+    
