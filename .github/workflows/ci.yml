@@ -26,9 +26,14 @@ jobs:
       - name: Notificar a Slack 
         if: success()
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"✅ *ÉXITO en el workflow CI* de `${{ github.repository }}`\n🟢 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
-          "${{ vars.SLACK_WEBHOOK_URL }}"
+          if [ "${{ steps.lint.outcome }}" == "success" ] && [ "${{ steps.test.outcome }}" == "success" ]; then
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"✅ *ÉXITO en el workflow CI* de `${{ github.repository }}`\n🟢 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
+              "${{ vars.SLACK_WEBHOOK_URL }}"
+          else
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"🚨 *FALLÓ el workflow CI* en `${{ github.repository }}`\n🔁 Rama: `${{ github.ref_name }}`\n🔗 Ver ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' \
+              "${{ vars.SLACK_WEBHOOK_URL }}"
 
 
 
