@@ -42,7 +42,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Desplegar en Render
         if: success()
-        uses: johnbeynon/render-deploy-action@v0.0.8
+        uses: SonarSource/sonarqube-scan-action@v1.0.0
         with:
           service-id: ${{ secrets.SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
