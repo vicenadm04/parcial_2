@@ -35,8 +35,8 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           "${{ vars.SLACK_WEBHOOK_URL }}"
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: Análisis con SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v1.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Desplegar en Render
