@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      build_status: echo "Resultado: ${{ steps.result.outcome }}"
+      build_status: echo "Resultado:${{ steps.result.outcome }}"
     steps:
       - name: clonar repositorios
         uses: actions/checkout@v3
