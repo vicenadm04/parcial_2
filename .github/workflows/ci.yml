@@ -86,11 +86,11 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\"
+          mensaje="**********%0A✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)%0A**********"
           else
-            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\"
+          mensaje="**********%0A🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)%0A**********"
           fi
 
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          --data "{\"text\": \"$mensaje\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           "${{ vars.SLACK_WEBHOOK_URL }}"
