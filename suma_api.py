@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from suma import suma  # Tu función original de suma(a, b)
-
+from suma import suma  
 app = FastAPI()
 
 @app.get("/suma")

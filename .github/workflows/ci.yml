@@ -57,6 +57,20 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+      - name: Notificar a Slack
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            mensaje="✅ *Análisis SonarCloud exitoso* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+          else
+            mensaje="🚨 *Fallo en análisis SonarCloud* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+          fi
+
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          "${{ vars.SLACK_WEBHOOK_URL }}"
+        
+        
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,3 +82,15 @@ jobs:
         with:
           service-id: ${{ secrets.SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
+      - name: Notificar a Slack
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+          else
+            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+          fi
+
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          "${{ vars.SLACK_WEBHOOK_URL }}"
