@@ -34,7 +34,7 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="********************* n\✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           else
             mensaje="🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           fi
