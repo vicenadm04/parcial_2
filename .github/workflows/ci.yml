@@ -38,9 +38,10 @@ jobs:
           else
             mensaje="🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           fi
-
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${mensaje}"${{ vars.SLACK_WEBHOOK_URL }}"
+          --data "{\"text\":\"${mensaje}\"}" \
+          "${{ vars.SLACK_WEBHOOK_URL }}"
+
 
   sonarcloud:
     runs-on: ubuntu-latest
