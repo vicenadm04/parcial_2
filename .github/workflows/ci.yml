@@ -86,9 +86,9 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\n********************************"
+            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\"
           else
-            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\n********************************"
+            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\"
           fi
 
           curl -X POST -H 'Content-type: application/json' \
