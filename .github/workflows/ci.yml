@@ -67,7 +67,7 @@ jobs:
           fi
 
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          --data "{\"text\":\"${mensaje}\
           "${{ vars.SLACK_WEBHOOK_URL }}"
         
         
@@ -92,5 +92,5 @@ jobs:
           fi
 
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${mensaje}\"}" \
+          --data "{\"text\":\"${mensaje}\"}" \\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" 
            "${{ vars.SLACK_WEBHOOK_URL }}"
