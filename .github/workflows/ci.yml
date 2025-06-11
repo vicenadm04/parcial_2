@@ -34,9 +34,9 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="********************************\n✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           else
-            mensaje="🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="********************************\n🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           fi
           curl -X POST -H 'Content-type: application/json' \
           --data "{\"text\":\"${mensaje}\"}" \
@@ -86,9 +86,9 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="✅ *Despliegue exitoso en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\n********************************"
           else
-            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="🚨 *Fallo en el despliegue en Render* de \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)\n********************************"
           fi
 
           curl -X POST -H 'Content-type: application/json' \
