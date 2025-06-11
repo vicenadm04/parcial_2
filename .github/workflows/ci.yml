@@ -34,7 +34,7 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            mensaje="********************* n\✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
+            mensaje="✅ *CI EXITOSO* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           else
             mensaje="🚨 *CI FALLÓ* en \`${{ github.repository }}\` (rama \`${{ github.ref_name }}\`)"
           fi
@@ -67,7 +67,7 @@ jobs:
           fi
 
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${mensaje}\
+          --data "{\"text\":\"${mensaje}\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           "${{ vars.SLACK_WEBHOOK_URL }}"
         
         
