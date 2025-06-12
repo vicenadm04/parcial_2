@@ -24,8 +24,10 @@ jobs:
           python -m pip install --upgrade pip 
           pip install -r requirements.txt
 
-      - name: ejecutar test
-        run: pytest
+      - name: Ejecutar tests con cobertura
+        run: |
+          coverage run -m pytest
+          overage xml
 
       - name: Notificar a Slack 
         if: always()
