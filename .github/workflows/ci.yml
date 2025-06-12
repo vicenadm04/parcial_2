@@ -26,6 +26,7 @@ jobs:
 
       - name: Ejecutar tests con cobertura
         run: |
+          pip install coverage
           coverage run -m pytest
           coverage xml
 
