@@ -1,3 +1,3 @@
 def suma(a,b):
-    resultado = a + hhib
+    resultado = a + b
     return resultado
