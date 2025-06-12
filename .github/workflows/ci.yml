@@ -94,3 +94,4 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data "{\"text\": \"$mensaje\n🔗 Ver: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           "${{ vars.SLACK_WEBHOOK_URL }}"
+ 
