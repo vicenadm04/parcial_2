@@ -27,8 +27,8 @@ jobs:
       - name: ejecutar test
         run: pytest
 
-      - name: ejecutar con flake8
-        run: flake8 . || true
+      #- name: ejecutar con flake8
+       # run: flake8 . || true
 
       - name: Notificar a Slack 
         if: always()
