@@ -27,7 +27,7 @@ jobs:
       - name: Ejecutar tests con cobertura
         run: |
           coverage run -m pytest
-          overage xml
+          coverage xml
 
       - name: Notificar a Slack 
         if: always()
