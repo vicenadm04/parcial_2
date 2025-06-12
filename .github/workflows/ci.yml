@@ -53,6 +53,8 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v2.0.1
         with:
           projectBaseDir: .
+          args: >
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
