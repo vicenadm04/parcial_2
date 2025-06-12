@@ -1,8 +1,7 @@
 # Librerías para pruebas
 pytest
 
-#fastapi
-uvicorn
+
 
 
  
